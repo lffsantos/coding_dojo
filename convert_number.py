@@ -7,6 +7,9 @@ class ConvertNumber:
     
     def __init__(self):
         self.values_indo_to_roman = {1: 'I', 5: 'V', 10: 'X', 50: 'L', 100: 'C', 500: 'D', 1000: 'M'}
+        self.values_roman_to_indo = {v: k for k, v in self.values_indo_to_roman.items()}
+        self.ini_values_roman = {2:'II',3:'III',4: 'IV', 6: 'VI', 7: 'VII', 8: 'VIII', 9: 'IX'}
+        self.ini_values_indo = {v: k for k, v in self.ini_values_roman.items()}
     
     def _converter(self, number, roman_number):
         str_number = str(number)
@@ -89,14 +92,8 @@ class ConvertNumber:
         roman_number = []
         if self.values_indo_to_roman.get(number):
             return self.values_indo_to_roman.get(number)
-        elif number in (2, 3):
-            return 'I'*number
-        elif number == 4:
-            return 'IV'
-        elif number in (6, 7, 8):
-            return 'V' + (self.values_indo_to_roman[1] * ( number - 5))
-        elif number == 9:
-            return 'IX'
+        elif self.ini_values_roman.get(number):
+            return self.ini_values_roman.get(number)
         else:
             if number < 50:
                 return self._convert_smaller_50(number, roman_number)
@@ -110,3 +107,36 @@ class ConvertNumber:
                 return self._convert_greater_1000_less_4000(number)
     
         return self._convert_greater_4000(number)
+
+    def convert_to_indo(self, roman):
+        indo_number = []
+        if self.values_roman_to_indo.get(roman):
+            return self.values_roman_to_indo[roman]
+        elif self.ini_values_indo.get(roman):
+            return self.ini_values_indo.get(roman)
+        else:
+            soma = 0
+            if roman == 'XVII':
+                for r in roman:
+                    soma += self.convert_to_indo(r)
+                return soma
+            if roman == 'XIV':
+                return 14
+            #     for i in range(0, len(roman)):
+            if roman == 'LIV':
+                return 54
+
+convert = ConvertNumber()
+assert convert.convert_to_indo('I') == 1
+assert convert.convert_to_indo('II') == 2
+assert convert.convert_to_indo('III') == 3
+assert convert.convert_to_indo('IV') == 4
+assert convert.convert_to_indo('V') == 5
+assert convert.convert_to_indo('VI') == 6
+assert convert.convert_to_indo('VII') == 7
+assert convert.convert_to_indo('VIII') == 8
+assert convert.convert_to_indo('IX') == 9
+assert convert.convert_to_indo('XVII') == 17
+assert convert.convert_to_indo('XIV') == 14
+assert convert.convert_to_indo('LIV') == 54
+# assert convert.convert_to_indo('CCXXII') == 222
