@@ -2,78 +2,91 @@ values_indo_to_roman = {1: 'I', 5: 'V', 10: 'X', 50: 'L', 100: 'C',
                         500: 'D', 1000: 'M'}
 
 
-def convert_smaller_50(number, roman_number):
+def convert_number(number, roman_number):
     str_number = str(number)
-    if str_number[-1] == '0':
+    last_digit = str_number[-1]
+    new_number = number - int(last_digit)
+    if new_number == number:
+        last_digit = str_number[-2:]
+        new_number = number - int(last_digit)
+
+    roman_number.append(convert_to_roman(int(last_digit)))
+    roman_number.append(convert_to_roman(new_number))
+    return ''.join(roman_number[::-1])
+
+
+def convert_smaller_50(number, roman_number):
+    '''
+    Converte numeros menores do que 50
+    '''
+    if str(number)[-1] == '0':
         if int(number/10) <= 3:
             return values_indo_to_roman[10] * int(number/10)
         else:
             return values_indo_to_roman[10] + values_indo_to_roman[50]
-    new_number = number - int(str(number)[-1])
-    roman_number.append(convert_to_roman(int(str(str_number)[-1])))
-    roman_number.append(convert_to_roman(new_number))
-    return ''.join(roman_number[::-1])
+
+    return convert_number(number, roman_number)
 
 
 def convert_greater_50_less_100(number, roman_number):
-    str_number = str(number)
-    if str_number[-1] == '0':
+    """
+    Converte numeros entre 50 e 100
+    """
+    if str(number)[-1] == '0':
         if int((number-50)/10) <= 3:
             return values_indo_to_roman[50] + values_indo_to_roman[10] * int((number-50)/10)
         else:
             return values_indo_to_roman[10] + values_indo_to_roman[100]
-    new_number = number - int(str(number)[-1])
-    roman_number.append(convert_to_roman(int(str(str_number)[-1])))
-    roman_number.append(convert_to_roman(new_number))
-    return ''.join(roman_number[::-1])
+
+    return convert_number(number, roman_number)
 
 
 def convert_greater_100_less_500(number, roman_number):
-    if number%100 == 0:
+    """
+    Converte numeros entre 100 e 500
+    """
+    if number % 100 == 0:
         if (number - 100)/100 < 3:
             return values_indo_to_roman[100] * (int((number - 100)/100)+1)
         else:
             return values_indo_to_roman[100] + values_indo_to_roman[500]
-    aux = str(number)[-1]
-    new_number = number - int(aux)
-    if new_number == number:
-        aux = str(number)[-2:]
-        new_number = number - int(aux)
-    roman_number.append(convert_to_roman(int(aux)))
-    roman_number.append(convert_to_roman(new_number))
-    return ''.join(roman_number[::-1])
+
+    return convert_number(number, roman_number)
 
 
 def convert_greater_500_less_1000(number, roman_number):
-    if number%100 == 0:
+    """
+    Converte numeros entre 500 e 1000
+    """
+    if number % 100 == 0:
         if (number - 500)/100 <= 3:
             return values_indo_to_roman[500] + values_indo_to_roman[100]* int((number - 500)/100)
         else:
             return values_indo_to_roman[100] + values_indo_to_roman[1000]
-    else:
-        aux = str(number)[-1]
-        new_number = number - int(aux)
-        if new_number == number:
-            aux = str(number)[-2:]
-            new_number = number - int(aux)
 
-        roman_number.append(convert_to_roman(int(aux)))
-        roman_number.append(convert_to_roman(new_number))
-        return ''.join(roman_number[::-1])
+    return convert_number(number, roman_number)
 
 
 def convert_greater_1000_less_4000(number):
-    str_number = str(number)
-    return int(str_number[0]) * values_indo_to_roman[1000] + convert_to_roman(number%1000)
+    """
+    Converte numeros entre 1000 e 4000
+    """
+    return int(str(number)[0]) * values_indo_to_roman[1000] + convert_to_roman(number%1000)
 
 
 def convert_greater_4000(number):
+    """
+    Converte numeros maiores do que 4000
+    """
     div = convert_to_roman(int(number/1000))
-    rest = convert_to_roman(number%1000)
+    rest = convert_to_roman(number % 1000)
     return "("+div+")" + rest
 
 
 def convert_to_roman(number):
+    """
+    Converte um numero decimal em romano
+    """
     roman_number = []
     if values_indo_to_roman.get(number):
         return values_indo_to_roman.get(number)
@@ -96,8 +109,10 @@ def convert_to_roman(number):
             return convert_greater_500_less_1000(number, roman_number)
         elif 1000 < number < 4000:
             return convert_greater_1000_less_4000(number)
-        else:
-            return convert_greater_4000(number)
+
+    return convert_greater_4000(number)
+
+
 
 
 assert convert_to_roman(1) == 'I'
