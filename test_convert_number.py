@@ -26,6 +26,7 @@ class ConvertNumberTest(unittest.TestCase):
         self.assertEqual(self.convert_number._convert_greater_4000(1550500), '(MDL)D')
 
 
+unittest.main()
 
 # assert convert_to_roman(1) == 'I'
 # assert convert_to_roman(5) == 'V'
