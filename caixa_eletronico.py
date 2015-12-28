@@ -14,6 +14,8 @@ def seleciona_cedula(valor, saida, nota):
     return saida
 
 def saque(valor, saida=()):
+    if valor%10 != 0:
+        return "não é possível efetuar o saque desse valor"
     if valor in cedulas:
         saida += (valor, )
         return saida
@@ -26,6 +28,8 @@ def saque(valor, saida=()):
 
     return saida
 
+assert saque(15) == "não é possível efetuar o saque desse valor"
+assert saque(11) == "não é possível efetuar o saque desse valor"
 assert saque(10) == (10 ,)
 assert saque(20) == (20, )
 assert saque(50) == (50, )
