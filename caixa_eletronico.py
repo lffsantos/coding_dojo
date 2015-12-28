@@ -24,12 +24,16 @@ class CaixaEletronico:
 
     def _calcula_saque(self, valor , saida):
         '''
-        Calcula o saque a ser efetuado e armazena as notas a serem impressas
+        Calcula o saque a ser efetuado e armazena e retorna as notas a serem impressas
         '''
+        if valor in self.cedulas:
+            saida += (valor, )
+            return saida
+
         nota = self._seleciona_cedula(valor)
         saida += (nota, )
         resto = valor - nota
-        return self.saque(resto, saida)
+        return self._calcula_saque(resto, saida)
 
 
     def saque(self, valor, saida=()):
@@ -38,10 +42,6 @@ class CaixaEletronico:
         '''
         if valor%10 != 0:
             return "não é possível efetuar o saque desse valor"
-
-        if valor in self.cedulas:
-            saida += (valor, )
-            return saida
 
         saque = self._calcula_saque(valor, saida)
 
