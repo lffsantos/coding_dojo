@@ -2,25 +2,15 @@
 http://dojopuzzles.com/problemas/exibe/caixa-eletronico/
 Notas disponíveis de R$ 100,00; R$ 50,00; R$ 20,00 e R$ 10,00
 """
+
 cedulas = [100, 50, 20, 10]
 
 
-def cedula20(valor, saida):
-    saida += (20, )
-    resto = valor - 20
+def seleciona_cedula(valor, saida, nota):
+    saida += (nota, )
+    resto = valor - nota
     saida = saque(resto, saida)
-    return saida
 
-def cedula50(valor, saida):
-    saida += (50, )
-    resto = valor - 50
-    saida = saque(resto, saida)
-    return saida
-
-def cedula100(valor, saida):
-    saida += (100, )
-    resto = valor - 100
-    saida = saque(resto, saida)
     return saida
 
 def saque(valor, saida=()):
@@ -28,11 +18,11 @@ def saque(valor, saida=()):
         saida += (valor, )
         return saida
     elif valor < 50:
-        saida = cedula20(valor, saida)
+        saida = seleciona_cedula(valor, saida, 20)
     elif 50 < valor < 100:
-        saida = cedula50(valor, saida)
+        saida = seleciona_cedula(valor, saida, 50)
     else:
-        saida = cedula100(valor, saida)
+        saida = seleciona_cedula(valor, saida, 100)
 
     return saida
 
