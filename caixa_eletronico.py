@@ -1,9 +1,3 @@
-"""
-http://dojopuzzles.com/problemas/exibe/caixa-eletronico/
-Notas disponíveis de R$ 100,00; R$ 50,00; R$ 20,00 e R$ 10,00
-"""
-
-
 class CaixaEletronico:
 
     def __init__(self):
