@@ -26,9 +26,9 @@ class ConvertNumber:
         '''
         if str(number)[-1] == '0':
             if int(number/10) <= 3:
-                return self.self.values_indo_to_roman[10] * int(number/10)
+                return self.values_indo_to_roman[10] * int(number/10)
             else:
-                return self.self.values_indo_to_roman[10] + self.self.values_indo_to_roman[50]
+                return self.values_indo_to_roman[10] + self.values_indo_to_roman[50]
     
         return self._converter(number, roman_number)
     
@@ -110,3 +110,95 @@ class ConvertNumber:
                 return self._convert_greater_1000_less_4000(number)
     
         return self._convert_greater_4000(number)
+
+
+# Testes:
+
+#############################
+
+# Cria uma instância da classe ConvertNumber
+conversor = ConvertNumber()
+
+assert conversor.convert_to_roman(1) == 'I'
+assert conversor.convert_to_roman(5) == 'V'
+assert conversor.convert_to_roman(10) == 'X'
+assert conversor.convert_to_roman(2) == 'II'
+assert conversor.convert_to_roman(3) == 'III'
+assert conversor.convert_to_roman(4) == 'IV'
+assert conversor.convert_to_roman(6) == 'VI'
+assert conversor.convert_to_roman(7) == 'VII'
+assert conversor.convert_to_roman(8) == 'VIII'
+assert conversor.convert_to_roman(9) == 'IX'
+assert conversor.convert_to_roman(11) == 'XI'
+assert conversor.convert_to_roman(12) == 'XII'
+assert conversor.convert_to_roman(13) == 'XIII'
+assert conversor.convert_to_roman(14) == 'XIV'
+assert conversor.convert_to_roman(15) == 'XV'
+assert conversor.convert_to_roman(16) == 'XVI'
+assert conversor.convert_to_roman(17) == 'XVII'
+assert conversor.convert_to_roman(18) == 'XVIII'
+assert conversor.convert_to_roman(19) == 'XIX'
+assert conversor.convert_to_roman(20) == 'XX'
+assert conversor.convert_to_roman(21) == 'XXI'
+assert conversor.convert_to_roman(27) == 'XXVII'
+assert conversor.convert_to_roman(28) == 'XXVIII'
+assert conversor.convert_to_roman(29) == 'XXIX'
+assert conversor.convert_to_roman(30) == 'XXX'
+assert conversor.convert_to_roman(31) == 'XXXI'
+assert conversor.convert_to_roman(34) == 'XXXIV'
+assert conversor.convert_to_roman(37) == 'XXXVII'
+assert conversor.convert_to_roman(39) == 'XXXIX'
+assert conversor.convert_to_roman(40) == 'XL'
+assert conversor.convert_to_roman(41) == 'XLI'
+assert conversor.convert_to_roman(44) == 'XLIV'
+assert conversor.convert_to_roman(47) == 'XLVII'
+assert conversor.convert_to_roman(49) == 'XLIX'
+assert conversor.convert_to_roman(50) == 'L'
+assert conversor.convert_to_roman(51) == 'LI'
+assert conversor.convert_to_roman(54) == 'LIV'
+assert conversor.convert_to_roman(60) == 'LX'
+assert conversor.convert_to_roman(60) == 'LX'
+assert conversor.convert_to_roman(70) == 'LXX'
+assert conversor.convert_to_roman(80) == 'LXXX'
+assert conversor.convert_to_roman(73) == 'LXXIII'
+assert conversor.convert_to_roman(69) == 'LXIX'
+assert conversor.convert_to_roman(88) == 'LXXXVIII'
+assert conversor.convert_to_roman(90) == 'XC'
+assert conversor.convert_to_roman(93) == 'XCIII'
+assert conversor.convert_to_roman(97) == 'XCVII'
+assert conversor.convert_to_roman(99) == 'XCIX'
+assert conversor.convert_to_roman(100) == 'C'
+assert conversor.convert_to_roman(200) == 'CC'
+assert conversor.convert_to_roman(300) == 'CCC'
+assert conversor.convert_to_roman(400) == 'CD'
+assert conversor.convert_to_roman(149) == 'CXLIX'
+assert conversor.convert_to_roman(101) == 'CI'
+assert conversor.convert_to_roman(110) == 'CX'
+assert conversor.convert_to_roman(115) == 'CXV'
+assert conversor.convert_to_roman(119) == 'CXIX'
+assert conversor.convert_to_roman(222) == 'CCXXII'
+assert conversor.convert_to_roman(367) == 'CCCLXVII'
+assert conversor.convert_to_roman(498) == 'CDXCVIII'
+assert conversor.convert_to_roman(894) == 'DCCCXCIV'
+assert conversor.convert_to_roman(501) == 'DI'
+assert conversor.convert_to_roman(521) == 'DXXI'
+assert conversor.convert_to_roman(578) == 'DLXXVIII'
+assert conversor.convert_to_roman(600) == 'DC'
+assert conversor.convert_to_roman(700) == 'DCC'
+assert conversor.convert_to_roman(800) == 'DCCC'
+assert conversor.convert_to_roman(900) == 'CM'
+assert conversor.convert_to_roman(972) == 'CMLXXII'
+assert conversor.convert_to_roman(2000) == 'MM'
+assert conversor.convert_to_roman(2500) == 'MMD'
+assert conversor.convert_to_roman(2577) == 'MMDLXXVII'
+assert conversor.convert_to_roman(2899) == 'MMDCCCXCIX'
+assert conversor.convert_to_roman(3899) == 'MMMDCCCXCIX'
+assert conversor.convert_to_roman(4000) == '(IV)'
+assert conversor.convert_to_roman(4500) == '(IV)D'
+assert conversor.convert_to_roman(5000) == '(V)'
+assert conversor.convert_to_roman(6000) == '(VI)'
+assert conversor.convert_to_roman(1550500) == '(MDL)D'
+assert conversor.convert_to_roman(15505000) == '((XV)DV)'
+assert conversor.convert_to_roman(749705) == '(DCCXLIX)DCCV'
+assert conversor.convert_to_roman(58037) == '(LVIII)XXXVII'
+assert conversor.convert_to_roman(981113000) == '((CMLXXXI)CXIII)'
